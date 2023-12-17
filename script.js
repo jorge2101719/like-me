@@ -1,13 +1,13 @@
 const tbody = document.querySelector("tbody")
 
 const getPosts = async () => {
-    alert("entro en getPost para conexion a Backend")
-    const res = await fetch("http://localhost:3000/productos") //conectando a una ruta del backend
+    alert("entro en getPosts para conexion a Backend")
+    const res = await fetch("http://localhost:3000/posts") //conectando a una ruta del backend
     const posts = await res.json()
     return posts
 }
 
-const fillTableWithPots = async () => {
+const fillTableWithPosts = async () => {
     const posts = await getPosts()
     tbody.innerHTML = ""
     posts.result.forEach(post => {
@@ -17,6 +17,7 @@ const fillTableWithPots = async () => {
                     <td>${post.titulo}</td>
                     <td>${post.imagen}</td>
                     <td>${post.descripcion}</td>
+                    <td>${post.likes}</td>
                 </tr >
                 `
     })
