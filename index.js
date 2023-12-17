@@ -34,7 +34,7 @@ app.listen(PORT, () => {
 // GET para ver ruta raiz
 // Funcionamiento comprobado con Thunder Client
 app.get("/", (req, res) => {
-    res.json({ ok: true, result: "Bienvenido a nuestra página..." });
+    res.json({ ok: true, result: "Bienvenido(a) a nuestra página..." });
 });
 
 // GET para ver el contenido de la tabla Posts
