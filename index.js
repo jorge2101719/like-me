@@ -1,24 +1,25 @@
 // para manejar variables de ambiente
-import * as dotenv from "dotenv";
-dotenv.config();
+// import * as dotenv from "dotenv";
+// dotenv.config();
+import 'dotenv/config';
 
 // importar manejador de errores y modulos propios
 import { handleErrors } from "./database/errors.js";
-import { verPosts, agregarPost, unPost } from './database/consultas.js';
+import { verPosts, agregarPost, unPost, pool } from './database/consultas.js';
 
 // Importar express y cors
 import express from "express";
-import cors from "cors";
-
 const app = express();
 
 // middleware de cors y de parseo del body
+import cors from "cors";
 app.use(cors());
 app.use(express.json());
 
 // levantando servidor USANDO UN PUERTO PREDETERMINADO EN .ENV
 // Se comprobó funcionamiento con Thunder Client
 const PORT = process.env.PORT || 3000;
+// const PORT = 3000;
 
 app.listen(PORT, () => {
   console.log("Servidor listo en http://localhost:" + PORT);

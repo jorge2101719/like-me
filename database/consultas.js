@@ -1,12 +1,20 @@
 import pkg from 'pg';
 const { Pool } = pkg;
 
+// const accesoBD = {
+//     host: 'localhost',
+//     user: 'jorge',
+//     password: '1234',
+//     database: 'likeme',
+//     allowExitOnIdle: true
+// }
+
 const accesoBD = {
-    host: 'localhost',
-    user: 'jorge',
-    // user: 'postgres',
-    password: '1234',
-    database: 'likeme',
+    // host: process.env.PGHOST,
+    // user: process.env.PGUSER,
+    // password: process.env.PGPASSWORD,
+    // database: process.env.PGDATABASE,
+    // port: process.env.PGPORT,
     allowExitOnIdle: true
 }
 
@@ -86,4 +94,4 @@ const agregarPost = async ({titulo, img, descripcion, likes}) => {
 // agregarPost('Capitán Futuro', 'ImagenCapitánFuturo', 'La justicia del mañana', 1)
 // agregarPost('Pikachú', 'ImagenPikachú', 'El Poke más famoso', 20)
 
-export { verPosts, agregarPost, unPost }
+export { verPosts, agregarPost, unPost, pool }
