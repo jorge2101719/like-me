@@ -9,16 +9,9 @@ const { Pool } = pkg;
 //     allowExitOnIdle: true
 // }
 
-const accesoBD = {
-    // host: process.env.PGHOST,
-    // user: process.env.PGUSER,
-    // password: process.env.PGPASSWORD,
-    // database: process.env.PGDATABASE,
-    // port: process.env.PGPORT,
+const pool = new Pool({
     allowExitOnIdle: true
-}
-
-const pool = new Pool(accesoBD)
+})
 
 // GET
 

@@ -1,11 +1,11 @@
 // para manejar variables de ambiente
-// import * as dotenv from "dotenv";
-// dotenv.config();
-import 'dotenv/config';
+import * as dotenv from "dotenv";
+dotenv.config();
+// import 'dotenv/config';
 
 // importar manejador de errores y modulos propios
 import { handleErrors } from "./database/errors.js";
-import { verPosts, agregarPost, unPost, pool } from './database/consultas.js';
+import { verPosts, agregarPost, unPost, pool } from './consultas.js';
 
 // Importar express y cors
 import express from "express";
@@ -15,20 +15,6 @@ const app = express();
 import cors from "cors";
 app.use(cors());
 app.use(express.json());
-
-// Intento de corrección del problema CORS. No funcionó.
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from  ///http://localhost:3000/
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    res.header(
-      "Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-    );
-    next();
-});
 
 // levantando servidor USANDO UN PUERTO PREDETERMINADO EN .ENV
 // Se comprobó funcionamiento con Thunder Client
@@ -49,6 +35,7 @@ app.listen(PORT, () => {
 // GET para ver ruta raiz
 // Funcionamiento comprobado con Thunder Client
 app.get("/", (req, res) => {
+    console.log('Estamos en la página princial')
     res.json({ ok: true, result: "Bienvenido(a) a nuestra página..." });
 });
 
@@ -56,9 +43,10 @@ app.get("/", (req, res) => {
 // Comprobado con Thunder Client
 app.get("/posts", async (req, res) => {
     try {
+        console.log('Todo bien');
         const result = await verPosts();
         //respuesta del servidor
-        return res.status(200).json({ ok: true, message: "Lista de posts registrados.", result }); 
+        return res.status(200).json({ ok: true, message: "Lista de posts registrados.", result });
     } catch (error) {
         console.log(error);
         const { status, message } = handleErrors(error.code);
@@ -82,8 +70,6 @@ app.get("/posts/:id", async (req, res, next) => {
     }
 });
 
-
-
 // POST para ingresar en post en la tabla Posts (visto en tutoría)
 // Verificado con Thunder Client. Funciona bien
 app.post("/posts", async (req, res) => {
@@ -92,7 +78,7 @@ app.post("/posts", async (req, res) => {
 
     try {
         const result = await agregarPost({titulo, img, descripcion, likes})
-        return res.status(201).json({ ok: true, message: "Post agregado con éxito", result }); //respuesta del servidor 
+        return res.status(201).json({ ok: true, message: "Post agregado con éxito", result }); //respuesta del servidor
     } catch (error) {
         console.log('Error mostrado', error);
         console.log("Error proveniente de respuesta de funcion de INSERTAR: ", error);

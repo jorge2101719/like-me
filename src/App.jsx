@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Form from "./components/Form";
 import Post from "./components/Post";
 
-const urlBaseServer = "http://localhost:3000";
+const urlBaseServer = "http://localhost:3002";
 
 function App() {
   const [titulo, setTitulo] = useState("");
@@ -13,7 +13,7 @@ function App() {
 
   const getPosts = async () => {
     const { data: posts } = await axios.get(urlBaseServer + "/posts");
-    setPosts([...posts]);
+    setPosts([...posts.result]);
   };
 
   const agregarPost = async () => {

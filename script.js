@@ -2,9 +2,14 @@ const tbody = document.querySelector("tbody")
 
 const getPosts = async () => {
     alert("entro en getPosts para conexion a Backend")
-    const res = await fetch("http://localhost:3000/posts") //conectando a una ruta del backend
-    const posts = await res.json()
-    return posts
+    try {
+        console.log('Dentro de getPosts')
+        const res = await fetch("http://localhost:3002") //conectando a una ruta del backend
+        const posts = await res.json()
+        return posts
+    } catch(error) {
+        console.log(error)
+    }
 }
 
 const fillTableWithPosts = async () => {
