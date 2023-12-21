@@ -73,15 +73,17 @@ app.get("/posts", async (req, res) => {
 // POST para ingresar en post en la tabla Posts (visto en tutoría)
 // Verificado con Thunder Client. Funciona bien
 app.post("/posts", async (req, res) => {
+    console.log('Entrando al post')
     // const { titulo, img, descripcion } = req.body
-    const post = {
-        titulo: req.body.titulo,
-        img: req.body.url,
-        descripcion: req.body.descripcion
-    }
     // console.log("valor req.body en la ruta /posts: ", req.body);
 
     try {
+        const post = {
+            titulo: req.body.titulo,
+            img: req.body.url,
+            descripcion: req.body.descripcion
+        }
+    
         // const result = await agregarPost({titulo, img, descripcion})
         const result = await agregarPost(post)
         return res.status(201).json({ ok: true, message: "Post agregado con éxito", result }); //respuesta del servidor

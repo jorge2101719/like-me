@@ -1,17 +1,17 @@
 import pkg from 'pg';
 const { Pool } = pkg;
 
-// const pool = new Pool({
-//     host: 'localhost',
-//     user: 'jorge',
-//     password: '1234',
-//     database: 'likeme',
-//     allowExitOnIdle: true
-// });
-
 const pool = new Pool({
+    host: 'localhost',
+    user: 'jorge',
+    password: '1234',
+    database: 'likeme',
     allowExitOnIdle: true
-})
+});
+
+// const pool = new Pool({
+//     allowExitOnIdle: true
+// })
 
 // GET
 
@@ -65,7 +65,7 @@ const verPosts = async () => {
 
 
 // POST (versión basada en la tutoría). Comprobada y funcionando
-const agregarPost = async (titulo, img, descripcion) => {
+const agregarPost = async ({titulo, img, descripcion}) => {
     if(!titulo?.trim() || !img?.trim() || !descripcion?.trim()) {
         throw { code: '400' };
     }
@@ -79,8 +79,6 @@ const agregarPost = async (titulo, img, descripcion) => {
 }
 
 // Compruebo que la función hace lo que debe en Thunder Client. Funciona.
-// agregarPost('Capitán Futuro', 'ImagenCapitánFuturo', 'La justicia del mañana', 1)
-// agregarPost('Pikachú', 'ImagenPikachú', 'El Poke más famoso', 20)
-agregarPost('Batman', 'https://wall.alphacoders.com/big.php?i=1340753', 'El caballero de la noche')
+// agregarPost('Batman', 'https://wall.alphacoders.com/big.php?i=1340753', 'El caballero de la noche')
 
 export { verPosts, agregarPost }
