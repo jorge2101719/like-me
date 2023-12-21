@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Form from "./components/Form";
 import Post from "./components/Post";
 
-const urlBaseServer = "http://localhost:3002";
+const urlBaseServer = "http://localhost:3000";
 
 function App() {
   const [titulo, setTitulo] = useState("");
@@ -14,13 +14,16 @@ function App() {
   const getPosts = async () => {
     const { data: posts } = await axios.get(urlBaseServer + "/posts");
     setPosts([...posts.result]);
-  };
+  }
 
   const agregarPost = async () => {
     const post = { titulo, url: imgSrc, descripcion };
+    if(!titulo.trim() || !imgSrc.trim() || !descripcion.trim()) {
+      alert('Debe llenar todos los campos');
+    }
     await axios.post(urlBaseServer + "/posts", post);
     getPosts();
-  };
+  }
 
   // este método se utilizará en el siguiente desafío
   const like = async (id) => {

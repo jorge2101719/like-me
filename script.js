@@ -4,7 +4,7 @@ const getPosts = async () => {
     alert("entro en getPosts para conexion a Backend")
     try {
         console.log('Dentro de getPosts')
-        const res = await fetch("http://localhost:3002") //conectando a una ruta del backend
+        const res = await fetch("http://localhost:3000") //conectando a una ruta del backend
         const posts = await res.json()
         return posts
     } catch(error) {
@@ -22,7 +22,6 @@ const fillTableWithPosts = async () => {
                     <td>${post.titulo}</td>
                     <td>${post.imagen}</td>
                     <td>${post.descripcion}</td>
-                    <td>${post.likes}</td>
                 </tr >
                 `
     })
